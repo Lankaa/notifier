@@ -1,18 +1,28 @@
 package ru.banknotifier.notifier.connection
 
+import org.json.JSONObject
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.QueryMap
+import retrofit2.http.*
 import ru.banknotifier.notifier.Bank
+import java.util.*
 
 interface ApiGetBanks {
-    @GET("/banks")
+    @GET("banks")
     fun fetchAllBanks(
-        @Header("token") token: String
+        @Header("Authorization") token: String
 //        @QueryMap params:Map<String, String>
     ): Call<List<Bank>>
 }
+
+interface ApiPutBank {
+    @PUT("banks/{id}")
+    fun changeBank(
+        @Path("id") id: Int,
+        @Header("Authorization") token: String,
+        @Body params: JSONObject
+    ): Call<Bank>
+}
+
 
 interface ApiGetNotification {
     @GET("/notifications")

@@ -1,13 +1,21 @@
 package ru.banknotifier.notifier.ui.chooseBanks
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.banknotifier.notifier.Bank
 import ru.banknotifier.notifier.R
+import ru.banknotifier.notifier.connection.ApiPutBank
+import ru.banknotifier.notifier.connection.RetrofitClientInstance
+
 
 class BankRecyclerViewAdapter(
     private var banks: List<Bank>
@@ -25,15 +33,48 @@ class BankRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bank = banks[position]
-//        holder.iconView.setImageResource(item.icon)
-        holder.bank.text = bank.title
-        holder.bank.isChecked = bank.isSelected
+        holder.bankCheckbox.text = bank.title
+        holder.bankCheckbox.isChecked = bank.isSelected
+        holder.bankCheckbox.setOnClickListener { _ ->
+            putBank(bank)
+        }
+
+        Picasso.get()
+            .load(bank.icon)
+            .resize(200, 200)
+            .centerCrop()
+            .into(holder.iconView)
+
     }
 
     override fun getItemCount(): Int = banks.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val iconView: ImageView = view.findViewById(R.id.bank_icon)
-        val bank: CheckBox = view.findViewById(R.id.bank_checkbox)
+        val bankCheckbox: CheckBox = view.findViewById(R.id.bank_checkbox)
+    }
+
+    private fun putBank(bank: Bank) {
+        val api = RetrofitClientInstance.getRetrofitInstance()!!.create(ApiPutBank::class.java)
+        val token = "20d274e4b0f7ee6b877f153e6c3099096f6e1dd832db9156931703d75a0e40c7"
+        val paramObject = JSONObject()
+        paramObject.put("title", bank.title)
+        paramObject.put("icon", bank.icon)
+        paramObject.put("isSelected", !bank.isSelected)
+        paramObject.put("notifications", bank.notifications)
+
+        println(paramObject)
+
+        api.changeBank(bank.id, token, paramObject).enqueue(object : Callback<Bank> {
+
+                override fun onResponse(call: Call<Bank>, response: Response<Bank>) {
+//                        bankModel = response.body()!!
+                    println(response.body())
+                }
+
+                override fun onFailure(call: Call<Bank>, t: Throwable) {
+                    println("putBank $call $t It is no ok")
+                }
+            })
     }
 }
