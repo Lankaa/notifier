@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_choosebanks">
+
+    <fragment
+        android:id="@+id/navigation_choosebanks"
+        android:name="ru.banknotifier.notifier.ui.chooseBanks.ChooseBanksFragment"
+        android:label="@string/title_choosebanks"
+        tools:layout="@layout/fragment_choosebanks" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="ru.banknotifier.notifier.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_feedback"
+        android:name="ru.banknotifier.notifier.ui.feedback.FeedbackFragment"
+        android:label="@string/title_feedback"
+        tools:layout="@layout/fragment_feedback" />
+</navigation>

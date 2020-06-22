@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Notifier</string>
+    <string name="title_choosebanks">Банки</string>
+    <string name="title_notifications">Уведомления</string>
+    <string name="title_feedback">Обратная связь</string>
+    <string name="feedback_hint">Опишите ваше пожелание или проблему</string>
+    <string name="feedback_note">Ввведено 0/1000</string>
+    <string name="feedback_hint_email">Ваш email</string>
+    <string name="feedback_note_email">Чтобы мы могли связаться с вами</string>
+    <string name="send">Отправить</string>
+    <string name="choose_time">Выбрать время</string>
+    <string name="info_icon_desc">Информация о времени оповещения</string>
+    <string name="bank_icon_desc">Иконка банка</string>
+    <string name="time_info">
+        Если появятся изменения в тарифах, то на следующий день в это время, вы получите уведомление
+    </string>
+    <string name="ok">ОК</string>
+    <string name="cancel">Отмена</string>
+    <string name="notification_in">Уведомления в %1$s</string>
+    <string name="link_text" href="%1$s">Ссылка на документ</string>
+</resources>

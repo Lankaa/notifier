@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "961839808231",
+    "firebase_url": "https://bank-notifier.firebaseio.com",
+    "project_id": "bank-notifier",
+    "storage_bucket": "bank-notifier.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961839808231:android:6d0a71f70a02cc8e6e2c42",
+        "android_client_info": {
+          "package_name": "ru.banknotifier.notifier"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961839808231-5qn3kig39sqf01j3nhpgmnpt472eggam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1Rwrt042xnN_leRmiHaWkzBZ5T1lHZ8E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961839808231-5qn3kig39sqf01j3nhpgmnpt472eggam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

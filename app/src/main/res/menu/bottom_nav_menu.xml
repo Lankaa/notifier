@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <item
+        android:id="@+id/navigation_choosebanks"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_choosebanks" />
+
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_notifications" />
+
+    <item
+        android:id="@+id/navigation_feedback"
+        android:icon="@drawable/ic_outline_feedback_24"
+        android:title="@string/title_feedback" />
+
+</menu>

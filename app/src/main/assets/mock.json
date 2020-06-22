@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Альфа-Банк",
+    "icon": "link",
+    "isSelected": false
+  },
+  {
+    "id": 2,
+    "title": "Сбербанк",
+    "icon": "link",
+    "isSelected": false
+  },
+  {
+    "id": 3,
+    "title": "Рокетбанк",
+    "icon": "link",
+    "isSelected": false
+  }
+]
