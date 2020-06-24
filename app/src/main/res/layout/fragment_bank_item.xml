@@ -29,7 +29,6 @@
         android:button="@color/colorPrimary"
         android:checked="false"
         android:drawableEnd="?android:attr/listChoiceIndicatorMultiple"
-        android:focusableInTouchMode="false"
-        android:text="CheckBox" />
+        android:focusableInTouchMode="false" />
 
 </LinearLayout>

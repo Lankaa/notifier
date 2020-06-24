@@ -7,7 +7,6 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,24 +56,21 @@ class BankRecyclerViewAdapter(
     private fun putBank(bank: Bank) {
         val api = RetrofitClientInstance.getRetrofitInstance()!!.create(ApiPutBank::class.java)
         val token = "20d274e4b0f7ee6b877f153e6c3099096f6e1dd832db9156931703d75a0e40c7"
-        val paramObject = JSONObject()
-        paramObject.put("title", bank.title)
-        paramObject.put("icon", bank.icon)
-        paramObject.put("isSelected", !bank.isSelected)
-        paramObject.put("notifications", bank.notifications)
 
-        println(paramObject)
+        val (title, icon, isSelected, id, notifications) = bank
 
-        api.changeBank(bank.id, token, paramObject).enqueue(object : Callback<Bank> {
+        val updateBank = Bank(title, icon, !isSelected, id, notifications)
 
-                override fun onResponse(call: Call<Bank>, response: Response<Bank>) {
-//                        bankModel = response.body()!!
-                    println(response.body())
-                }
+        api.changeBank(id, token, updateBank).enqueue(object : Callback<Bank> {
 
-                override fun onFailure(call: Call<Bank>, t: Throwable) {
-                    println("putBank $call $t It is no ok")
-                }
-            })
+            override fun onResponse(call: Call<Bank>, response: Response<Bank>) {
+//                       bankModel = response.body()!!
+                println(response.body())
+            }
+
+            override fun onFailure(call: Call<Bank>, t: Throwable) {
+                println("putBank $call $t It is no ok")
+            }
+        })
     }
 }

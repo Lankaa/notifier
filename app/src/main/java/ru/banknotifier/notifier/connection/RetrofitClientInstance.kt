@@ -20,7 +20,7 @@ class RetrofitClientInstance {
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL) //.client(okHttpClient)
                     .client(getUnsafeOkHttpClient().build())
-//                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
             }

@@ -1,17 +1,21 @@
 package ru.banknotifier.notifier.ui.notifications
 
-import android.graphics.Color
+import android.annotation.SuppressLint
+import android.text.format.DateFormat
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import ru.banknotifier.notifier.NotificationsDummy
+import com.squareup.picasso.Picasso
+import ru.banknotifier.notifier.Notification
 import ru.banknotifier.notifier.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NotificationsRecyclerViewAdapter(
-    private val values: List<NotificationsDummy.NotificationItem>
+    private var notifications: List<Notification>
 ) : RecyclerView.Adapter<NotificationsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,16 +24,26 @@ class NotificationsRecyclerViewAdapter(
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = values[position]
-        holder.iconView.setImageResource(item.icon)
-        holder.iconView.setColorFilter(Color.BLACK)
-        holder.bankTitle.text = item.bankTitle
-        holder.tariffLink.text = item.link
-        holder.date.text = item.date
+    fun setData(notificationModel: List<Notification> ) {
+        this.notifications = notificationModel
     }
 
-    override fun getItemCount(): Int = values.size
+    @SuppressLint("SimpleDateFormat")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val notification = notifications[position]
+        holder.bankTitle.text = notification.bank.title
+        holder.tariffLink.text = notification.fileLink
+        holder.date.text = notification.date
+
+        Picasso.get()
+            .load(notification.bank.icon)
+            .resize(200, 200)
+            .centerCrop()
+            .into(holder.iconView)
+
+    }
+
+    override fun getItemCount(): Int = notifications.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val iconView: ImageView = view.findViewById(R.id.bank_icon)

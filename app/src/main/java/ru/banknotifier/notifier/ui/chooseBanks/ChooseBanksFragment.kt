@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_choosebanks.*
-import kotlinx.android.synthetic.main.fragment_choosebanks.view.time_in
+import kotlinx.android.synthetic.main.fragment_choosebanks.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,10 +34,6 @@ class ChooseBanksFragment : Fragment() {
     ): View? {
         root = inflater.inflate(R.layout.fragment_choosebanks, container, false)
 
-        val timeInfoTextView: TextView = root.time_in
-
-        timeInfoTextView.text = getString(R.string.notification_in, "09:00")
-
         val chooseTimeBtn: Button = root.findViewById(R.id.choose_time_btn)
         chooseTimeBtn.setOnClickListener{
             activity?.supportFragmentManager?.let { view ->
@@ -51,6 +47,10 @@ class ChooseBanksFragment : Fragment() {
 
         return root
     }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//    }
 
     private fun loadBanks() {
         val api = RetrofitClientInstance.getRetrofitInstance()!!.create(ApiGetBanks::class.java)
@@ -89,6 +89,11 @@ class ChooseBanksFragment : Fragment() {
         chooseBanksViewModel.getBanks().observe(viewLifecycleOwner, Observer {
             adapter2.setData(bankModel)
             banks_list.adapter!!.notifyDataSetChanged()
+        })
+
+        val timeInfoTextView: TextView = root.time_in
+        chooseBanksViewModel.notificationTimeText.observe(viewLifecycleOwner, Observer {
+            timeInfoTextView.text = getString(R.string.notification_in, "09:00")
         })
     }
 

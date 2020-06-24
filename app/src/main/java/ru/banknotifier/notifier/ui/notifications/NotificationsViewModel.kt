@@ -3,11 +3,17 @@ package ru.banknotifier.notifier.ui.notifications
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ru.banknotifier.notifier.Notification
 
 class NotificationsViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    private val notifications = MutableLiveData<List<Notification>>()
+
+    fun setBanks(notificationsList: List<Notification>){
+        notifications.value = notificationsList
     }
-    val text: LiveData<String> = _text
+
+    fun getNotifications(): LiveData<List<Notification>> {
+        return notifications
+    }
 }
