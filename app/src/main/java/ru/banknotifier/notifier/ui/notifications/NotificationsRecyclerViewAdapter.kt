@@ -1,18 +1,19 @@
 package ru.banknotifier.notifier.ui.notifications
 
 import android.annotation.SuppressLint
-import android.text.format.DateFormat
+import android.os.Build
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.squareup.picasso.Picasso
 import ru.banknotifier.notifier.Notification
 import ru.banknotifier.notifier.R
-import java.text.SimpleDateFormat
-import java.util.*
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 class NotificationsRecyclerViewAdapter(
     private var notifications: List<Notification>
@@ -28,12 +29,16 @@ class NotificationsRecyclerViewAdapter(
         this.notifications = notificationModel
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val notification = notifications[position]
         holder.bankTitle.text = notification.bank.title
         holder.tariffLink.text = notification.fileLink
-        holder.date.text = notification.date
+
+        val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        val dateFromString = ZonedDateTime.parse(notification.date)
+        holder.date.text = dateFromString.format(formatter)
 
         Picasso.get()
             .load(notification.bank.icon)
